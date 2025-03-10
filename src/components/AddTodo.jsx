@@ -57,7 +57,7 @@ const AddTodo = () => {
         handleShiftSection();
     };
   return (
-        <div onClick={handleShiftSection} className="w-full min-h-screen bg-zinc-900 text-white flex items-center justify-center">
+        <div  className="w-full min-h-screen bg-zinc-900 text-white flex items-center justify-center">
             <div className="border-1 shadow-md p-8 rounded-xl shadow-lg w-[40%] space-y-6">
             <div className="flex flex-row justify-between items-center">
                 <h2 className="text-2xl font-semibold">Create Todo</h2>
