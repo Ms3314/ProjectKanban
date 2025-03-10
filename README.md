@@ -1,8 +1,10 @@
-# Project Kanban
-
+# Project Kanban 
+ 
 A simple and intuitive Kanban board application built with React, Vite, and dnd-kit for drag-and-drop functionality.
 
 ![image](https://github.com/user-attachments/assets/ce2444fa-ec51-4c51-809c-65e06db4446c)
+
+Deployed Link : https://project-kanban-zeta.vercel.app/
 
 ## Features
 
