@@ -12,7 +12,7 @@ const COLUMS = [
   {id : 'COMPLETED' , title : 'Done' }
 ];
 
-// Enhanced Zustand store with task management functions
+//  Zustand store with task management functions
 export const useStore = create((set, get) => ({
   todoBar: false,
   OpenCloseTodoBar: () => set((state) => ({ todoBar: !(state.todoBar) })),
@@ -26,12 +26,17 @@ export const useStore = create((set, get) => ({
     localStorage.setItem('tasks', JSON.stringify(newTodos));
     set({ Todos: newTodos });
   },
+
   SearchTodo: (title) => {
-    if(title == '' || title == undefined || title == undefined) {
-      set({Todos : JSON.parse(localStorage.getItem("tasks"))})
+    if (!title) {
+        const allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        set({ Todos: allTasks });
     } else {
-      const updateSearchTodo = get().Todos.filter((item)=> item.title.toLowerCase().slice(0,3) == title.toLowerCase().slice(0,3))
-      set({Todos : updateSearchTodo})
+        const currentTodos = get().Todos;
+        const updateSearchTodo = currentTodos.filter((item) => 
+            item.title.toLowerCase().includes(title.toLowerCase())
+        );
+        set({ Todos: updateSearchTodo });
     }
   },
     // Refresh todos from localStorage
@@ -73,11 +78,12 @@ const App = () => {
   const todos = useStore((state) => state.Todos);
   const updateTaskStatus = useStore((state) => state.updateTaskStatus);
   
-  // Log when todos change
+  // Log when todos change , so that the page rerenders 
   useEffect(() => {
     console.log("Todos state changed:", todos);
   }, [todos]);
   
+  // responsible for the drag and drop feature 
   function handleDragEnd(event) {
     const { active, over } = event;
     if (!over) return;
@@ -93,8 +99,9 @@ const App = () => {
     <AddTodo />
   ) : (
     <div className="w-full p-10 h-auto flex-col bg-zinc-900 text-white flex items-center">
+      <h1 className="text-3xl">KANBAN</h1>
       <SearchBar />
-      <div className="flex flex-row gap-8">
+      <div className="flex flex-col lg:flex-row gap-8">
         <DndContext onDragEnd={handleDragEnd}>
           {COLUMS.map((item) => (
             <Column
