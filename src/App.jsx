@@ -98,10 +98,10 @@ const App = () => {
   return isAddTodoOpen ? (
     <AddTodo />
   ) : (
-    <div className="w-full p-10 h-auto flex-col bg-zinc-900 text-white flex items-center">
+    <div className="w-full p-10  h-auto flex-col bg-zinc-900 text-white flex items-center">
       <h1 className="text-3xl">KANBAN</h1>
       <SearchBar />
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col px-5 lg:flex-row gap-8">
         <DndContext onDragEnd={handleDragEnd}>
           {COLUMS.map((item) => (
             <Column
